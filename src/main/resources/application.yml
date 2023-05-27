@@ -1,0 +1,73 @@
+spring:
+  application:
+    name: socle-effyis
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/socle_db?createDatabaseIfNotExist=true
+    username: postgres
+    password: 12345
+    testwhileIdle: true
+    validationQuery: SELECT 1
+    minIdle: 10
+    maxIdle: 50
+    initialSize: 10
+    maxWait: 60000
+    testOnBorrow: true
+    hikari:
+      maxLifetime: 30000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  #mail:
+    #host: smtp.gmail.com
+    #port: 587
+    #username: email
+    #password: password
+    #sign: ...
+    #location: Casablanca
+    #properties:
+      #mail:
+        #smtp:
+          #auth: true
+          #starttls:
+            #enable: true
+#ldap:
+  #urls: ldap://ldap.forumsys.com:389/
+  #base:
+    #dn: dc=example,dc=com
+  #username: cn=read-only-admin,dc=example,dc=com
+  #password: password
+  #user:
+    #dn:
+      #pattern: uid={0}
+
+
+security:
+  public:
+    endpoint: /indatacore/api/api-docs/**,/indatacore/api/swagger-ui/**,/indatacore/api/accounts/login,/indatacore/api/accounts/register,/indatacore/api/objects/*
+  jwt:
+    secret: secret
+    expiration:
+      time: 2592000000
+
+springdoc:
+  swagger-ui:
+    path: /indatacore/api/swagger-ui
+  api-docs:
+    path: /indatacore/api/api-docs
+
+
+server:
+  port: 9000
+
+default:
+  role: DEFAULT
+
+management:
+  health:
+    ldap:
+      enabled: false
